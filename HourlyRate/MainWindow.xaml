@@ -1,0 +1,91 @@
+﻿<Window x:Class="HourlyRate.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HourlyRate"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="470.4" Width="801.6" Loaded="Window_Loaded">
+    <Window.Resources>
+        <local:SessionList x:Key="sessions"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="270*"/>
+            <ColumnDefinition Width="200*"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Header="Win-rate" HorizontalAlignment="Left" Height="183" Margin="22,15,0,0" VerticalAlignment="Top" Width="206">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="95"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Width="75" Margin="10" Text="Big Blind"/>
+                <TextBlock Grid.Row="1" Width="75" Margin="10" Text="Hands played"/>
+                <TextBlock Grid.Row="2" Width="75" Margin="10" Text="Amount won"/>
+                <ComboBox Name="BBCombo" Grid.Row="0" Grid.Column="1" Margin="10"/>
+                <TextBox x:Name="handsPlayedTxt" Grid.Row="1" Grid.Column="1" Margin="10" TextChanged="handsPlayedTxt_TextChanged"/>
+                <TextBox x:Name="amountWonTxt" Grid.Row="2" Grid.Column="1" Margin="10" TextChanged="amountWonTxt_TextChanged"/>
+                <Button x:Name="winRateBtn" Content="Win-rate" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="8" Click="winRateBtn_Click"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Expected win based on win-rate" HorizontalAlignment="Left" Height="183" Margin="22,236,0,0" VerticalAlignment="Top" Width="206">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="95"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Width="75" Margin="10" Text="Big Blind"/>
+                <TextBlock Grid.Row="1" Width="75" Margin="10" Text="Hands played"/>
+                <TextBlock Grid.Row="2" Width="75" Margin="10" Text="Win rate"/>
+                <ComboBox Name="BBCombo2" Grid.Row="0" Grid.Column="1" Margin="10"/>
+                <TextBox x:Name="handsPlayed2Txt" Grid.Row="1" Grid.Column="1" Margin="10" TextChanged="handsPlayed2Txt_TextChanged"/>
+                <TextBox x:Name="winRateTxt" Grid.Row="2" Grid.Column="1" Margin="10" TextChanged="winRateTxt_TextChanged"/>
+                <Button x:Name="expectedWinBtn" Content="Expected Win" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="8" Click="expectedWinBtn_Click"/>
+            </Grid>
+        </GroupBox>
+        <TextBlock x:Name="textBlockMain" HorizontalAlignment="Left" Margin="14.4,15,0,0" TextWrapping="Wrap" TextAlignment="Center" Text="" VerticalAlignment="Top"  Width="287" FontSize="18" Grid.Column="1" FontWeight="Bold" Height="69"/>
+        <DataGrid Name="statsDataGrid" ItemsSource="{StaticResource sessions}" AutoGenerateColumns="False" EnableRowVirtualization="True" AlternatingRowBackground="Beige"  HorizontalAlignment="Left" Height="258" Margin="13.8,124,0,0" VerticalAlignment="Top" Width="293" Grid.Column="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Date" Width="70" Binding="{Binding Path=SessionDate, StringFormat='dd.MM.yyyy'}"/>
+                <DataGridTextColumn Header="Stakes" Width="70" Binding="{Binding Path=Stakes}"/>
+                <DataGridTextColumn Header="Hands" Width="70" Binding="{Binding Path=HandsPlayed}"/>
+                <DataGridTextColumn Header="Result" Width="70" Binding="{Binding Path=Result}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="newButton" Content="New" Grid.Column="1" HorizontalAlignment="Left" Margin="14.4,400,0,0" VerticalAlignment="Top" Width="75" Click="newButton_Click"/>
+        <Button x:Name="modifyButton" Content="Modify" Grid.Column="1" HorizontalAlignment="Left" Margin="122.4,400,0,0" VerticalAlignment="Top" Width="75" Click="modifyButton_Click"/>
+        <Button x:Name="deleteButton" Content="Delete" Grid.Column="1" HorizontalAlignment="Left" Margin="226.4,400,0,0" VerticalAlignment="Top" Width="75" Click="deleteButton_Click"/>
+        <GroupBox Grid.Column="2" Header="Stats by Stakes" HorizontalAlignment="Left" Height="404" Margin="20.4,15,0,0" VerticalAlignment="Top" Width="198">
+            <Grid HorizontalAlignment="Left" Margin="5,5,5,5" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="90"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="305"/>
+                    <RowDefinition Height="85"/>
+                </Grid.RowDefinitions>
+                <TextBox x:Name="stakesStatsTxt" Grid.ColumnSpan="2" Background="DimGray" VerticalScrollBarVisibility="Auto" Foreground="AntiqueWhite" IsReadOnly="True"/>
+                <ComboBox Name="stakesCombo" Grid.Row="1" Height="24" Width="77" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="11,42.2,12,19.4"/>
+                <Button x:Name="stakesStatsBtn" Content="Get Stats" Grid.Row="1" Width="60" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8,41.2,20.4,19.4" Grid.Column="1" Click="stakesStatsBtn_Click"/>
+                <TextBlock HorizontalAlignment="Left" Margin="10,18.2,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Stakes" VerticalAlignment="Top" Width="70"/>
+            </Grid>
+        </GroupBox>
+        <TextBlock x:Name="handsTotalTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="14.4,93,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="26" Width="121" FontWeight="Bold"/>
+        <Button x:Name="clearBtn" Content="Clear" Grid.Column="1" HorizontalAlignment="Left" Margin="172.4,93,0,0" VerticalAlignment="Top" Width="129" Click="clearBtn_Click"/>
+    </Grid>
+</Window>

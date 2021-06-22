@@ -1,0 +1,32 @@
+﻿<Window x:Class="HourlyRate.Modify"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HourlyRate"
+        mc:Ignorable="d"
+        Title="Modify" Height="273.6" Width="260.4" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Margin="25,10" Text="Session date" TextAlignment="Left" VerticalAlignment="Center"/>
+        <DatePicker Name="sessionDatePicker" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="1" Margin="25,10" Text="Stakes" TextAlignment="Left" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="2" Margin="25,10" Text="Hands played" TextAlignment="Left" VerticalAlignment="Center"/>
+        <TextBlock Grid.Row="3" Margin="25,10" Text="Result" TextAlignment="Left" VerticalAlignment="Center"/>
+        <ComboBox Name="stakesCombo" Grid.Row="1" Grid.Column="1" Margin="15 10" VerticalAlignment="Center"/>
+        <TextBox x:Name="handsPlayedTxt" Grid.Row="2" Grid.Column="1" Margin="15 13" TextChanged="handsPlayedTxt_TextChanged"/>
+        <TextBox x:Name="resultTxt" Grid.Row="3" Grid.Column="1" Margin="15 13" TextChanged="resultTxt_TextChanged"/>
+        <Button x:Name="saveBtn" Content="Save" Grid.Column="0" Grid.Row="4" Margin="15 13" Click="saveBtn_Click"/>
+        <Button Name="cancelBtn" Content="Cancel" Grid.Column="1" Grid.Row="4" Margin="15 13" Click="cancelBtn_Click"/>
+    </Grid>
+</Window>
